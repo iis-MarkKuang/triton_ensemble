@@ -1,0 +1,32 @@
+name: "ensemble_demo"
+platform: "ensemble"
+input [
+  {
+    name: "ensemble_input"
+    data_type: TYPE_FP32
+    dims: [ -1 ]
+  }
+]
+output [
+  {
+    name: "ensemble_output"
+    data_type: TYPE_FP32
+    dims: [ -1 ]
+  }
+]
+ensemble_scheduling {
+  step [
+    {
+      model_name: "sparse_mat_comp"
+      model_version: -1
+      input_map {
+        key: "input"
+        value: "ensemble_input"
+      }
+      output_map {
+        key: "output"
+        value: "ensemble_output"
+      }
+    }
+  ]
+}
